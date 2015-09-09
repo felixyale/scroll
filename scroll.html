@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<title>Touch Scroll</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0">
+  <style type="text/css">
+  #wrapper {
+      height: 100%;
+      -webkit-transform: translate3d(0px,0,0);
+      transform: translate3d(0px,0,0);
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+  }
+
+  #scroller {
+      position: absolute;
+      z-index: 1;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      width: 100%;
+      -webkit-transform: translateZ(0);
+      -moz-transform: translateZ(0);
+      -ms-transform: translateZ(0);
+      -o-transform: translateZ(0);
+      transform: translateZ(0);
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-text-size-adjust: none;
+      -moz-text-size-adjust: none;
+      -ms-text-size-adjust: none;
+      -o-text-size-adjust: none;
+      text-size-adjust: none;
+  }
+
+  .page {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  #page-1 {
+    z-index: 3;
+    background: rgba(248,80,50,1);
+    background: -moz-linear-gradient(top, rgba(248,80,50,1) 0%, rgba(241,111,92,1) 14%, rgba(246,41,12,1) 55%, rgba(240,47,23,1) 81%, rgba(231,56,39,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(248,80,50,1)), color-stop(14%, rgba(241,111,92,1)), color-stop(55%, rgba(246,41,12,1)), color-stop(81%, rgba(240,47,23,1)), color-stop(100%, rgba(231,56,39,1)));
+    background: -webkit-linear-gradient(top, rgba(248,80,50,1) 0%, rgba(241,111,92,1) 14%, rgba(246,41,12,1) 55%, rgba(240,47,23,1) 81%, rgba(231,56,39,1) 100%);
+    background: -o-linear-gradient(top, rgba(248,80,50,1) 0%, rgba(241,111,92,1) 14%, rgba(246,41,12,1) 55%, rgba(240,47,23,1) 81%, rgba(231,56,39,1) 100%);
+    background: -ms-linear-gradient(top, rgba(248,80,50,1) 0%, rgba(241,111,92,1) 14%, rgba(246,41,12,1) 55%, rgba(240,47,23,1) 81%, rgba(231,56,39,1) 100%);
+    background: linear-gradient(to bottom, rgba(248,80,50,1) 0%, rgba(241,111,92,1) 14%, rgba(246,41,12,1) 55%, rgba(240,47,23,1) 81%, rgba(231,56,39,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f85032', endColorstr='#e73827', GradientType=0 );
+  }
+  #page-2 {
+    z-index: 2;
+    background: rgba(243,226,199,1);
+    background: -moz-linear-gradient(top, rgba(243,226,199,1) 0%, rgba(193,158,103,1) 50%, rgba(182,141,76,1) 51%, rgba(233,212,179,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(243,226,199,1)), color-stop(50%, rgba(193,158,103,1)), color-stop(51%, rgba(182,141,76,1)), color-stop(100%, rgba(233,212,179,1)));
+    background: -webkit-linear-gradient(top, rgba(243,226,199,1) 0%, rgba(193,158,103,1) 50%, rgba(182,141,76,1) 51%, rgba(233,212,179,1) 100%);
+    background: -o-linear-gradient(top, rgba(243,226,199,1) 0%, rgba(193,158,103,1) 50%, rgba(182,141,76,1) 51%, rgba(233,212,179,1) 100%);
+    background: -ms-linear-gradient(top, rgba(243,226,199,1) 0%, rgba(193,158,103,1) 50%, rgba(182,141,76,1) 51%, rgba(233,212,179,1) 100%);
+    background: linear-gradient(to bottom, rgba(243,226,199,1) 0%, rgba(193,158,103,1) 50%, rgba(182,141,76,1) 51%, rgba(233,212,179,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3e2c7', endColorstr='#e9d4b3', GradientType=0 );
+  }
+  #page-3 {
+    z-index: 1;
+    background: rgba(169,3,41,1);
+    background: -moz-linear-gradient(top, rgba(169,3,41,1) 0%, rgba(143,2,34,1) 44%, rgba(109,0,25,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(169,3,41,1)), color-stop(44%, rgba(143,2,34,1)), color-stop(100%, rgba(109,0,25,1)));
+    background: -webkit-linear-gradient(top, rgba(169,3,41,1) 0%, rgba(143,2,34,1) 44%, rgba(109,0,25,1) 100%);
+    background: -o-linear-gradient(top, rgba(169,3,41,1) 0%, rgba(143,2,34,1) 44%, rgba(109,0,25,1) 100%);
+    background: -ms-linear-gradient(top, rgba(169,3,41,1) 0%, rgba(143,2,34,1) 44%, rgba(109,0,25,1) 100%);
+    background: linear-gradient(to bottom, rgba(169,3,41,1) 0%, rgba(143,2,34,1) 44%, rgba(109,0,25,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019', GradientType=0 );
+  }
+  body {
+    margin: 0;
+  }
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+    <div id="scroller">
+      <div class="page" id="page-1">
+        向上滑
+      </div>
+      <div class="page" id="page-2">
+        向左滑
+      </div>
+      <div class="page" id="page-3">
+        向下滑
+      </div>
+    </div>
+  </div>
+  <script src="assets/jquery-2.1.1.min.js"></script>
+  <script src="assets/jquery.transit.js"></script>
+  <script src="assets/main.js"></script>
+</body>
+</html>
